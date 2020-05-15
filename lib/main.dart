@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+// Hello Hussain
+
 final List<String> images = [
   'https://images.unsplash.com/photo-1586882829491-b81178aa622e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80',
   'https://images.unsplash.com/photo-1586871608370-4adee64d1794?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2862&q=80',
@@ -9,10 +11,6 @@ final List<String> images = [
   'https://images.unsplash.com/photo-1586951144438-26d4e072b891?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
   'https://images.unsplash.com/photo-1586953983027-d7508a64f4bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
 ];
-
-
-
-
 
 void main() {
   runApp(
@@ -35,10 +33,9 @@ class MyApp extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: <Color>[
-                    Colors.black,
-                    Colors.black,
-                  ])
-          ),
+                Colors.black,
+                Colors.black,
+              ])),
         ),
       ),
       body: ListView(
@@ -47,13 +44,13 @@ class MyApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10.0),
                 width: 100,
                 height: 140,
                 color: Colors.white,
-                child: Image.network("https://i.pinimg.com/originals/fc/9f/ce/fc9fce935d8535f13a96a52e4af879c5.jpg"),
+                child: Image.network(
+                    "https://i.pinimg.com/originals/fc/9f/ce/fc9fce935d8535f13a96a52e4af879c5.jpg"),
               ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 5.0),
@@ -61,21 +58,20 @@ class MyApp extends StatelessWidget {
 
                 child: Container(
                     child: CarouselSlider.builder(
-                      itemCount: images.length,
-                      options: CarouselOptions(
-                        autoPlay: true,
-                        aspectRatio: 2.0,
-                        enlargeCenterPage: true,
-                      ),
-                      itemBuilder: (context, index) {
-                        return Container(
-                          child: Center(
-                              child: Image.network(images[index], fit: BoxFit.cover, width: 1000)
-                          ),
-                        );
-                      },
-                    )
-                ),
+                  itemCount: images.length,
+                  options: CarouselOptions(
+                    autoPlay: true,
+                    aspectRatio: 2.0,
+                    enlargeCenterPage: true,
+                  ),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      child: Center(
+                          child: Image.network(images[index],
+                              fit: BoxFit.cover, width: 1000)),
+                    );
+                  },
+                )),
               ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 5.0),
