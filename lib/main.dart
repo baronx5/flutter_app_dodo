@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-// Hello Hussain
+import 'package:getflutter/getflutter.dart';
 
-final List<String> images = [
-  'https://images.unsplash.com/photo-1586882829491-b81178aa622e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80',
-  'https://images.unsplash.com/photo-1586871608370-4adee64d1794?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2862&q=80',
-  'https://images.unsplash.com/photo-1586901533048-0e856dff2c0d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
-  'https://images.unsplash.com/photo-1586902279476-3244d8d18285?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80',
-  'https://images.unsplash.com/photo-1586943101559-4cdcf86a6f87?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1556&q=80',
-  'https://images.unsplash.com/photo-1586951144438-26d4e072b891?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
-  'https://images.unsplash.com/photo-1586953983027-d7508a64f4bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
+final List<String> imageList = [
+  "https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg",
+  "https://cdn.pixabay.com/photo/2017/12/13/00/23/christmas-3015776_960_720.jpg",
+  "https://cdn.pixabay.com/photo/2019/12/19/10/55/christmas-market-4705877_960_720.jpg",
+  "https://cdn.pixabay.com/photo/2019/12/20/00/03/road-4707345_960_720.jpg",
+  "https://cdn.pixabay.com/photo/2019/12/22/04/18/x-mas-4711785__340.jpg",
+  "https://cdn.pixabay.com/photo/2016/11/22/07/09/spruce-1848543__340.jpg"
 ];
 
 void main() {
@@ -20,23 +18,24 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        title: Text("widget.title"),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: <Color>[
-                Colors.black,
-                Colors.black,
-              ])),
+        title: Text(
+          "HOME",
+          style: TextStyle(color: Colors.black),
         ),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
       ),
       body: ListView(
         children: <Widget>[
@@ -45,46 +44,80 @@ class MyApp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10.0),
-                width: 100,
-                height: 140,
-                color: Colors.white,
-                child: Image.network(
-                    "https://i.pinimg.com/originals/fc/9f/ce/fc9fce935d8535f13a96a52e4af879c5.jpg"),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 5.0),
-                //height: 300,
-
-                child: Container(
-                    child: CarouselSlider.builder(
-                  itemCount: images.length,
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    aspectRatio: 2.0,
-                    enlargeCenterPage: true,
-                  ),
-                  itemBuilder: (context, index) {
-                    return Container(
-                      child: Center(
-                          child: Image.network(images[index],
-                              fit: BoxFit.cover, width: 1000)),
-                    );
+                child: GFCarousel(
+                  pagination: true,
+                  height: 300,
+                  items: imageList.map(
+                    (url) {
+                      return Container(
+                        padding: EdgeInsets.only(bottom: 25.0),
+                        margin: EdgeInsets.all(8),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          child: Image.network(url,
+                              fit: BoxFit.cover, width: 1000.0),
+                        ),
+                      );
+                    },
+                  ).toList(),
+                  onPageChanged: (index) {
+                    setState(() {
+                      index;
+                    });
                   },
-                )),
+                ),
+              ),
+              Container(
+                  margin: EdgeInsets.symmetric(vertical: 5.0),
+                  padding: EdgeInsets.all(30),
+                  color: Colors.grey[100],
+                  child: Center(
+                      child: Column(
+                    children: <Widget>[
+                      Icon(
+                        Icons.card_giftcard,
+                        size: 40,
+                      ),
+                      Text(
+                        'Hello',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'Hello This is our shooping app',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  ))),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5.0),
+                child: GFItemsCarousel(
+                  rowCount: 3,
+                  children: imageList.map(
+                        (url) {
+                      return Container(
+                        margin: EdgeInsets.all(5.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          child:
+                          Image.network(url, fit: BoxFit.cover, width: 1000.0),
+
+                        ),
+                      );
+                    },
+                  ).toList(),
+                ),
               ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 5.0),
                 width: 100,
                 height: 300,
-                color: Colors.blue[300],
-                child: Text('Text3'),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 5.0),
-                width: 100,
-                height: 300,
-                color: Colors.yellow[300],
+                color: Colors.orange[300],
                 child: Text('Text3'),
               ),
             ],
