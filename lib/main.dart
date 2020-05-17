@@ -3,7 +3,7 @@ import 'package:getflutter/getflutter.dart';
 
 final List<String> imageList = [
   "https://pa.namshicdn.com/product/A8/67726W/1-web-desktop-list.jpg",
-  "https://cdn.pixabay.com/photo/2017/12/13/00/23/christmas-3015776_960_720.jpg",
+  "https://miro.medium.com/max/1742/0*Hkb-ctuDVxrxSwa0",
   "https://cdn.pixabay.com/photo/2019/12/19/10/55/christmas-market-4705877_960_720.jpg",
   "https://cdn.pixabay.com/photo/2019/12/20/00/03/road-4707345_960_720.jpg",
   "https://pa.namshicdn.com/product/46/8363/v1/1-web-desktop-list.jpg",
@@ -58,11 +58,11 @@ class _MyAppState extends State<MyApp> {
             title: Text('Home'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
+            icon: Icon(Icons.search),
             title: Text('Business'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: Icon(Icons.list),
             title: Text('School'),
           ),
         ],
@@ -90,6 +90,7 @@ class _MyAppState extends State<MyApp> {
                 child: GFCarousel(
                   pagination: true,
                   height: 300,
+                  viewportFraction: 1.0,
                   items: imageList.map(
                     (url) {
                       return Container(
