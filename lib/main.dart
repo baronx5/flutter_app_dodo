@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:getflutter/getflutter.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'imgSliderpp.dart';
+import 'imgSlider-api.dart';
+
+
+
 
 final List<String> imageList = [
   "https://pa.namshicdn.com/product/A8/67726W/1-web-desktop-list.jpg",
@@ -73,10 +80,34 @@ class _MyAppState extends State<MyApp> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
+        leading: IconButton(
+          padding: EdgeInsets.only(left: 20.0),
+          iconSize: 30,
+          icon: Icon(
+            Icons.view_list,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            // do something
+          },
+        ),
         title: Text(
           "HOME",
           style: TextStyle(color: Colors.black),
         ),
+        actions: <Widget>[
+          IconButton(
+            padding: EdgeInsets.only(right: 20.0),
+            iconSize: 30,
+            icon: Icon(
+              Icons.shopping_basket,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              // do something
+            },
+          ),
+        ],
         backgroundColor: Colors.white,
         elevation: 0.0,
       ),
@@ -174,6 +205,25 @@ class _MyAppState extends State<MyApp> {
                   },
                 ),
               ),
+              Container(
+                child: FutureBuilder(
+                  future: fetchimgSlide(),
+                  builder: (context, snapshot){
+                    if(snapshot.hasData){
+                      return ListView.builder(
+                        itemCount: snapshot.data.length,
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, index){
+                          ImgSliderpp image = snapshot.data[index];
+                          return Text('${image.img}');
+
+                        },
+                      );
+                    }
+                    return CircularProgressIndicator();
+                  },
+                ),
+              )
             ],
           ),
         ],
