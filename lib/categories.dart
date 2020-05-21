@@ -6,7 +6,12 @@ import 'categories.dart';
 import 'search.dart';
 import 'imgSlider-api.dart';
 
-class categories extends StatelessWidget {
+class categories extends StatefulWidget {
+  @override
+  _categoriesState createState() => _categoriesState();
+}
+
+class _categoriesState extends State<categories> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,14 +19,22 @@ class categories extends StatelessWidget {
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              tabs: [
-                Tab(icon: Icon(Icons.directions_car)),
-                Tab(icon: Icon(Icons.directions_transit)),
-                Tab(icon: Icon(Icons.directions_bike)),
-              ],
-            ),
+          appBar: TabBar(
+            tabs: [
+              Tab(child: Text('الاطفال', style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'DroidKufi',
+
+              ),)),
+              Tab(child: Text('النساء', style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'DroidKufi',
+
+              ),)),
+              Tab(icon: Icon(Icons.directions_transit, color: Colors.black)),
+            ],
           ),
           body: TabBarView(
             children: [
