@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:getflutter/getflutter.dart';
-import 'dart:convert';
 import 'home.dart';
 import 'categories.dart';
 import 'search.dart';
@@ -83,7 +81,7 @@ class _MyAppState extends State<MyApp> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shop),
-            title: Text('Shop'),
+            title: Text('Categories'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
