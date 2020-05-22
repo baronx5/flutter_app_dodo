@@ -9,9 +9,7 @@ class homePage extends StatefulWidget {
 }
 
 class _homePageState extends State<homePage> {
-
   Future imgSlidemain;
-
   @override
   void initState() {
     super.initState();

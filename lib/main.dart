@@ -26,6 +26,9 @@ class _MyAppState extends State<MyApp> {
     searchPage(),
   ];
 
+  // for title app Bar
+  String appBarTitle = "الرئيسية";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +47,8 @@ class _MyAppState extends State<MyApp> {
           },
         ),
         title: Text(
-          "HOME",
-          style: TextStyle(color: Colors.black),
+          "${appBarTitle}",
+          style: TextStyle(color: Colors.black, fontFamily: 'DroidKufi'),
         ),
         actions: <Widget>[
           IconButton(
@@ -72,6 +75,15 @@ class _MyAppState extends State<MyApp> {
         onTap: (int index) {
           setState(() {
             _selectedPage = index;
+            if (_selectedPage == 0) {
+              appBarTitle = "الرئيسية";
+            }
+            if (_selectedPage == 1) {
+              appBarTitle = "الأقسام الرئيسية";
+            }
+            if (_selectedPage == 2) {
+              appBarTitle = "البحث";
+            }
           });
         },
         items: [
