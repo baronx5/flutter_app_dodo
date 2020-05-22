@@ -11,13 +11,6 @@ class categories extends StatefulWidget {
 }
 
 class _categoriesState extends State<categories> {
-  Future getProductsData() async{
-    var url = 'http://swordtech.net/catdemo/select-cat.php';
-    var response = await http.get(url);
-    var responseBody = jsonDecode(response.body);
-    return responseBody;
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +72,14 @@ class Products extends StatefulWidget {
 }
 
 class _ProductsState extends State<Products> {
+  Future getProductsData() async{
+    var url = 'http://swordtech.net/catdemo/select-cat.php';
+    var response = await http.get(url);
+    var responseBody = jsonDecode(response.body);
+    return responseBody;
+  }
+
+
   List<Widget> products = [
     Row(
       children: <Widget>[
