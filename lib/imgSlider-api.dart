@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 
   fetchImg() async {
 
-    final responseData = await http.get("http://swordtech.net/catdemo/select-cat.php");
+    final responseData = await http.get("http://localhost/catdemo/select-cat.php");
     if (responseData.statusCode == 200){
       final data = jsonDecode(responseData.body);
       for(var i in data){

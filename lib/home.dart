@@ -78,17 +78,19 @@ class _homePageState extends State<homePage> {
                           size: 40,
                         ),
                         Text(
-                          'Hello',
+                          'مرحبا ',
                           style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
+                            fontFamily: 'DroidKufi',
                           ),
                         ),
                         Text(
-                          'Hello This is our shooping app',
+                          'يمكنك تصفح وشراء منتجاتك اونلاين',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.normal,
+                            fontFamily: 'DroidKufi',
                           ),
                         ),
                       ],
