@@ -21,7 +21,11 @@ class _categoriesState extends State<categories> {
   @override
   Widget build(BuildContext context) {
     // Fot List view
-    final List<String> entries = <String>['الاحذية', 'الملابس الرياضية', 'الجينز'];
+    final List<String> entries = <String>[
+      'الاحذية',
+      'الملابس الرياضية',
+      'الجينز'
+    ];
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -81,62 +85,67 @@ class _categoriesState extends State<categories> {
                   if (snapshot.hasData) {
                     return GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: MediaQuery.of(context).size.height / 1350.0,
+                            childAspectRatio:
+                                MediaQuery.of(context).size.height / 1350.0,
                             crossAxisCount: 2),
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, i) {
                           return Container(
-
-                              margin: EdgeInsets.all(10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  GestureDetector(
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10.0),
-
-                                      child: Image.network(
-                                        snapshot.data[i]['imgUrl'],
-                                        fit: BoxFit.cover,
-                                        height: 250,
-                                        width: double.infinity,
-
-                                      ),
+                            margin: EdgeInsets.all(10),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                GestureDetector(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    child: Image.network(
+                                      snapshot.data[i]['imgUrl'],
+                                      fit: BoxFit.cover,
+                                      height: 250,
+                                      width: double.infinity,
                                     ),
-                                    onTap: (){
-                                      print(snapshot.data[i]['id']);
-                                    },
                                   ),
-                                  Container(
-                                    width: double.infinity,
-                                    color: Colors.white,
-
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                                        children: <Widget>[
-                                          Text(snapshot.data[i]["price"].toString()+ " KWD", style: TextStyle(color: Colors.lightGreen, fontSize: 12),),
-                                          Directionality(
-                                            textDirection: TextDirection.rtl,
-                                            child: Text(snapshot.data[i]['name'], style: TextStyle(
+                                  onTap: () {
+                                    print(snapshot.data[i]['id']);
+                                  },
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Expanded(
+                                            child: Text(
+                                          snapshot.data[i]["price"].toString() +
+                                              " KWD",
+                                          style: TextStyle(
+                                              color: Colors.lightGreen,
+                                              fontSize: 12),
+                                        )),
+                                        Directionality(
+                                          textDirection: TextDirection.rtl,
+                                          child: Text(
+                                            snapshot.data[i]['name'],
+                                            style: TextStyle(
                                               fontFamily: 'DroidKufi',
                                               fontSize: 12,
                                               color: Colors.black87,
-
-                                            ),),
+                                            ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-
-                                ],
-                              ),
-                            );
+                                ),
+                              ],
+                            ),
+                          );
                         });
                   }
                   return CircularProgressIndicator();
@@ -145,51 +154,60 @@ class _categoriesState extends State<categories> {
               Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(top:8.0, left:8.0, right: 8.0),
+                    padding:
+                        const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
                     child: Container(
                       height: 200,
                       color: Colors.greenAccent[200],
-                      child: Image.network('https://a.namshicdn.com/cms/large/adidas/20190228/module_01.jpg',
-                      fit: BoxFit.cover,),
+                      child: Image.network(
+                        'https://a.namshicdn.com/cms/large/adidas/20190228/module_01.jpg',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Expanded(
                     child: ListView.separated(
                         padding: const EdgeInsets.all(8),
                         itemCount: entries.length,
-                        separatorBuilder: (BuildContext context, int index) => Divider(),
+                        separatorBuilder: (BuildContext context, int index) =>
+                            Divider(),
                         itemBuilder: (BuildContext context, int index) {
                           return Container(
                             height: 50,
                             color: Colors.grey[200],
-                            child: Center(child: Row(
+                            child: Center(
+                                child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,                                  children: <Widget>[
-                                    Text('قسم ${entries[index]}',style: TextStyle(
-                                      fontFamily: 'DroidKufi',
-                                      fontSize: 18,
-                                    ),),
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(
+                                      ' ${entries[index]}',
+                                      style: TextStyle(
+                                        fontFamily: 'DroidKufi',
+                                        fontSize: 16,
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 Column(
                                   children: <Widget>[
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Icon(Icons.favorite, size: 30.0,),
+                                      child: Icon(
+                                        Icons.favorite,
+                                        size: 30.0,
+                                      ),
                                     ),
                                   ],
                                 ),
-
                               ],
                             )),
                           );
-                        }
-                    ),
+                        }),
                   )
-
                 ],
               ),
             ],
