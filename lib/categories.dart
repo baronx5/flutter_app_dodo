@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:getflutter/getflutter.dart';
 import 'package:http/http.dart' as http;
 
 class categories extends StatefulWidget {
@@ -18,14 +17,16 @@ class _categoriesState extends State<categories> {
     return responseBody;
   }
 
+  Future getCatWomen() async {
+    var url = 'http://localhost/catdemo/catwomen.php?women=true';
+    var responseWomenUrl = await http.get(url);
+    var responseWomen = jsonDecode(responseWomenUrl.body);
+    return responseWomen;
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    // Fot List view
-    final List<String> entries = <String>[
-      'الاحذية',
-      'الملابس الرياضية',
-      'الجينز'
-    ];
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -65,19 +66,62 @@ class _categoriesState extends State<categories> {
           ),
           body: TabBarView(
             children: [
-              GridView.count(
-                // Create a grid with 2 columns. If you change the scrollDirection to
-                // horizontal, this produces 2 rows.
-                crossAxisCount: 3,
-                // Generate 100 widgets that display their index in the List.
-                children: List.generate(30, (index) {
-                  return Center(
-                    child: Text(
-                      'Item $index',
-                      style: Theme.of(context).textTheme.headline5,
+              Column(
+                children: <Widget>[
+                  Padding(
+                    padding:
+                    const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                    child: Container(
+                      height: 200,
+                      color: Colors.greenAccent[200],
+                      child: Image.network(
+                        'https://a.namshicdn.com/cms/large/adidas/20190228/module_01.jpg',
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  );
-                }),
+                  ),
+                  FutureBuilder(
+                    future: getCatWomen(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot){
+                      if (snapshot.hasData) {
+                        return Expanded(
+                          child: ListView.separated(
+                              padding: const EdgeInsets.all(8),
+                              itemCount: snapshot.data.length,
+                              separatorBuilder: (BuildContext context, int index) =>
+                                  Divider(),
+                              itemBuilder: (context , i ){
+                                return Container(
+                                  height: 50,
+                                  color: Colors.grey[200],
+                                  child: Center(child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Text(snapshot.data[i]['name'],
+                                          style: TextStyle(
+                                            fontFamily: 'DroidKufi',
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                          padding: const EdgeInsets.all(5.0),
+                                          child: Image.network(snapshot.data[i]['icon'], width: 30.0,)
+                                      ),
+
+                                    ],
+                                  ), ),);
+
+                              }),
+                        );
+                      }
+                      return CircularProgressIndicator();
+                    },
+                  ),
+                ],
               ),
               FutureBuilder(
                 future: getProductsData(),
@@ -151,65 +195,7 @@ class _categoriesState extends State<categories> {
                   return CircularProgressIndicator();
                 },
               ),
-              Column(
-                children: <Widget>[
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                    child: Container(
-                      height: 200,
-                      color: Colors.greenAccent[200],
-                      child: Image.network(
-                        'https://a.namshicdn.com/cms/large/adidas/20190228/module_01.jpg',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: ListView.separated(
-                        padding: const EdgeInsets.all(8),
-                        itemCount: entries.length,
-                        separatorBuilder: (BuildContext context, int index) =>
-                            Divider(),
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            height: 50,
-                            color: Colors.grey[200],
-                            child: Center(
-                                child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(
-                                      ' ${entries[index]}',
-                                      style: TextStyle(
-                                        fontFamily: 'DroidKufi',
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Icon(
-                                        Icons.favorite,
-                                        size: 30.0,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )),
-                          );
-                        }),
-                  )
-                ],
-              ),
+              Text('Here another Caregories'),
             ],
           ),
         ),

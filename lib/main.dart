@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'categories.dart';
 import 'search.dart';
-import 'imgSlider-api.dart';
 
 void main() {
   runApp(
