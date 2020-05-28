@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:http/http.dart' as http;
-import 'search.dart';
+import 'productView.dart';
 
 class categories extends StatefulWidget {
   @override
@@ -40,7 +40,9 @@ class _categoriesState extends State<categories> {
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          appBar: TabBar(
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(60.0),
+              child: TabBar(
             tabs: [
               Tab(
                   child: Text(
@@ -70,7 +72,7 @@ class _categoriesState extends State<categories> {
                 ),
               )),
             ],
-          ),
+          )),
           body: TabBarView(
             children: [
               Column(
@@ -159,7 +161,13 @@ class _categoriesState extends State<categories> {
                                   ),
                                   onTap: () {
                                     print(snapshot.data[i]['id']);
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> searchPage()));
+                                    Navigator.of(context).push(new MaterialPageRoute<Null>(
+                                        builder: (BuildContext context) {
+                                          return new productView();
+                                        },
+                                        fullscreenDialog: true,
+                                    ));
+
                                   },
                                 ),
                                 Container(

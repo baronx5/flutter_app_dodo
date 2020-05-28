@@ -9,6 +9,7 @@ class homePage extends StatefulWidget {
 }
 
 class _homePageState extends State<homePage> {
+
   Future imgSlidemain;
   @override
   void initState() {
@@ -17,7 +18,41 @@ class _homePageState extends State<homePage> {
   }
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Scaffold(
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.white,
+          centerTitle: true,
+          leading: IconButton(
+            padding: EdgeInsets.only(left: 20.0),
+            iconSize: 30,
+            icon: Icon(
+              Icons.view_list,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              // do something
+            },
+          ),
+          title: Text(
+            "التسوق الاونلاين",
+            style: TextStyle(color: Colors.black, fontFamily: 'DroidKufi'),
+          ),
+          actions: <Widget>[
+            IconButton(
+              padding: EdgeInsets.only(right: 20.0),
+              iconSize: 30,
+              icon: Icon(
+                Icons.shopping_basket,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                // do something
+              },
+            ),
+          ],
+        ),
+        body: ListView(
       children: <Widget>[
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -161,6 +196,7 @@ class _homePageState extends State<homePage> {
           ],
         ),
       ],
+    )
     );
   }
 }

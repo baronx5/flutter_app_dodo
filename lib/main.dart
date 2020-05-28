@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'home.dart';
 import 'categories.dart';
 import 'search.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.blue,
+    statusBarColor: Colors.pink,
+  ));
   runApp(
     MaterialApp(
       home: MyApp(),
@@ -25,46 +30,9 @@ class _MyAppState extends State<MyApp> {
     searchPage(),
   ];
 
-  // for title app Bar
-  String appBarTitle = "الرئيسية";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        centerTitle: true,
-        leading: IconButton(
-          padding: EdgeInsets.only(left: 20.0),
-          iconSize: 30,
-          icon: Icon(
-            Icons.view_list,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            // do something
-          },
-        ),
-        title: Text(
-          "${appBarTitle}",
-          style: TextStyle(color: Colors.black, fontFamily: 'DroidKufi'),
-        ),
-        actions: <Widget>[
-          IconButton(
-            padding: EdgeInsets.only(right: 20.0),
-            iconSize: 30,
-            icon: Icon(
-              Icons.shopping_basket,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              // do something
-            },
-          ),
-        ],
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-      ),
       body: IndexedStack(
         index: _selectedPage,
         children: _pageOptions,
@@ -74,15 +42,6 @@ class _MyAppState extends State<MyApp> {
         onTap: (int index) {
           setState(() {
             _selectedPage = index;
-            if (_selectedPage == 0) {
-              appBarTitle = "الرئيسية";
-            }
-            if (_selectedPage == 1) {
-              appBarTitle = "الأقسام الرئيسية";
-            }
-            if (_selectedPage == 2) {
-              appBarTitle = "البحث";
-            }
           });
         },
         items: [
