@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:http/http.dart' as http;
+import 'search.dart';
 
 class categories extends StatefulWidget {
   @override
@@ -22,6 +23,12 @@ class _categoriesState extends State<categories> {
     var responseWomenUrl = await http.get(url);
     var responseWomen = jsonDecode(responseWomenUrl.body);
     return responseWomen;
+  }
+  Future getCatMen() async {
+    var url = 'http://localhost/catdemo/catmen.php?men=true';
+    var responseMenUrl = await http.get(url);
+    var responseMen = jsonDecode(responseMenUrl.body);
+    return responseMen;
   }
 
 
@@ -75,13 +82,13 @@ class _categoriesState extends State<categories> {
                       height: 200,
                       color: Colors.greenAccent[200],
                       child: Image.network(
-                        'https://a.namshicdn.com/cms/large/adidas/20190228/module_01.jpg',
+                        'https://graci.es/img/home-graci-children-fashion-spain.jpg',width: 1000.0,
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   FutureBuilder(
-                    future: getCatWomen(),
+                    future: getCatMen(),
                     builder: (BuildContext context, AsyncSnapshot snapshot){
                       if (snapshot.hasData) {
                         return Expanded(
@@ -118,7 +125,7 @@ class _categoriesState extends State<categories> {
                               }),
                         );
                       }
-                      return CircularProgressIndicator();
+                      return Center(child: CircularProgressIndicator());
                     },
                   ),
                 ],
@@ -152,6 +159,7 @@ class _categoriesState extends State<categories> {
                                   ),
                                   onTap: () {
                                     print(snapshot.data[i]['id']);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> searchPage()));
                                   },
                                 ),
                                 Container(
@@ -195,7 +203,63 @@ class _categoriesState extends State<categories> {
                   return CircularProgressIndicator();
                 },
               ),
-              Text('Here another Caregories'),
+              Column(
+        children: <Widget>[
+          Padding(
+            padding:
+            const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+            child: Container(
+              height: 200,
+              color: Colors.greenAccent[200],
+              child: Image.network(
+                'https://a.namshicdn.com/cms/large/adidas/20190228/module_01.jpg',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          FutureBuilder(
+            future: getCatWomen(),
+            builder: (BuildContext context, AsyncSnapshot snapshot){
+              if (snapshot.hasData) {
+                return Expanded(
+                  child: ListView.separated(
+                      padding: const EdgeInsets.all(8),
+                      itemCount: snapshot.data.length,
+                      separatorBuilder: (BuildContext context, int index) =>
+                          Divider(),
+                      itemBuilder: (context , i ){
+                        return Container(
+                          height: 50,
+                          color: Colors.grey[200],
+                          child: Center(child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Text(snapshot.data[i]['name'],
+                                  style: TextStyle(
+                                    fontFamily: 'DroidKufi',
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Image.network(snapshot.data[i]['icon'], width: 30.0,)
+                              ),
+
+                            ],
+                          ), ),);
+
+                      }),
+                );
+              }
+              return CircularProgressIndicator();
+            },
+          ),
+        ],
+      ),
             ],
           ),
         ),
