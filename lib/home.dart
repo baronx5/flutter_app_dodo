@@ -21,6 +21,7 @@ class _homePageState extends State<homePage> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0.0,
+          brightness: Brightness.light,
           backgroundColor: Colors.white,
           centerTitle: true,
           leading: IconButton(

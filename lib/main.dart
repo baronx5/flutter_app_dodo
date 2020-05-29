@@ -5,10 +5,7 @@ import 'categories.dart';
 import 'search.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.blue,
-    statusBarColor: Colors.pink,
-  ));
+
   runApp(
     MaterialApp(
       home: MyApp(),
