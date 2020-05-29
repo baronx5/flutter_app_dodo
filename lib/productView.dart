@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutterappdodo/search.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'selecterProductPage.dart';
 
 class productView extends StatefulWidget {
 
@@ -67,8 +69,11 @@ class _productViewState extends State<productView> {
                             print(snapshot.data[i]['id']);
                             Navigator.of(context)
                                 .push(new MaterialPageRoute<Null>(
+                              settings: RouteSettings(
+                                arguments: snapshot.data[i]
+                              ),
                               builder: (BuildContext context) {
-                                return new productView();
+                                return new selectedProductPage();
                               },
                               fullscreenDialog: true,
                             ));

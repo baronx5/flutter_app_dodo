@@ -28,7 +28,7 @@ class _homePageState extends State<homePage> {
             padding: EdgeInsets.only(left: 20.0),
             iconSize: 30,
             icon: Icon(
-              Icons.view_list,
+              Icons.search,
               color: Colors.black,
             ),
             onPressed: () {
